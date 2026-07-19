@@ -20,12 +20,12 @@
         "version": "main+02d976e"
     },
     {
-        "url": "https://github.com/meshroomHub/mrGSplat",
-        "version": "1.0"
-    },
-    {
         "url": "https://github.com/meshroomHub/mrGeolocation",
         "version": "v0.2"
+    },
+    {
+        "url": "https://github.com/meshroomHub/mrGSplat",
+        "version": "1.0"
     },
     {
         "url": "https://github.com/meshroomHub/mrHelloWorld",
@@ -33,15 +33,15 @@
     },
     {
         "url": "https://github.com/meshroomHub/mrIntrinsicImageDecomposition",
-        "version": "1.2.1"
-    },
-    {
-        "url": "https://github.com/meshroomHub/mrLINOUniPS",
-        "version": "main+fec24bc"
+        "version": "v1.2.1"
     },
     {
         "url": "https://github.com/meshroomHub/mrLichtfeld",
         "version": "main+a285996"
+    },
+    {
+        "url": "https://github.com/meshroomHub/mrLINOUniPS",
+        "version": "main+fec24bc"
     },
     {
         "url": "https://github.com/meshroomHub/mrOpenRNb",
@@ -52,20 +52,20 @@
         "version": "2.1.0"
     },
     {
-        "url": "https://github.com/meshroomHub/mrSDMUniPS",
-        "version": "main+3e906c3"
-    },
-    {
         "url": "https://github.com/meshroomHub/mrSam3d",
         "version": "1.1.0"
     },
     {
+        "url": "https://github.com/meshroomHub/mrSDMUniPS",
+        "version": "main+3e906c3"
+    },
+    {
         "url": "https://github.com/meshroomHub/mrSegmentation",
-        "version": "1.4.1"
+        "version": "v1.4.1"
     },
     {
         "url": "https://github.com/meshroomHub/mrStablePoint",
-        "version": "1.0.1"
+        "version": "v1.0.1"
     },
     {
         "url": "https://github.com/meshroomHub/mrSubmitters",
