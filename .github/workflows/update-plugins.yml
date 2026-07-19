@@ -1,0 +1,62 @@
+name: Update plugin registry
+
+on:
+  schedule:
+    # Runs every day at 04:00 UTC
+    - cron: '0 4 * * *'
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+
+# Grants the auto-generated GITHUB_TOKEN write access to repo contents,
+# which is what actually authorizes the push/tag steps below.
+permissions:
+  contents: write
+
+# Prevent overlapping runs (e.g. schedule + manual trigger) from racing
+# on the same commit/tag; queue them instead of cancelling.
+concurrency:
+  group: update-plugins
+  cancel-in-progress: false
+
+jobs:
+  update-plugins:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Update plugins.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/update_plugins.py
+
+      - name: Commit and tag changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if git diff --quiet -- plugins.json; then
+            echo "No changes to plugins.json"
+            exit 0
+          fi
+
+          TAG="$(date -u +'%Y.%m.%d')"
+
+          # Sets the commit author/committer identity shown in history.
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add plugins.json
+          git commit -m "Update plugin registry ($TAG)"
+
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+          # Tag with today's UTC date, moving the tag if a rerun (e.g. manual
+          # re-trigger) already created it earlier the same day.
+          git tag -f "$TAG"
+          git push --force origin "refs/tags/$TAG"
