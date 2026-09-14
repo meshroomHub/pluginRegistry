@@ -2,10 +2,11 @@
 """Rebuild plugins.json from the current state of the meshroomHub GitHub org.
 
 A repository is considered a Meshroom plugin if it has a root "meshroom"
-folder. Its version is the name of its newest tag (by commit date), or
-"<default-branch>+<short-sha>" of the latest commit if it has no tags.
+folder. Its versions are the names of its newest tags (by commit date), 
+or "<default-branch>+<short-sha>" of the latest commit if it has no tags.
 """
 import json
+import math
 import os
 import re
 import sys
@@ -19,6 +20,17 @@ ORG = "meshroomHub"
 API_BASE = "https://api.github.com"
 TOKEN = os.environ["GITHUB_TOKEN"]
 PLUGINS_JSON = Path(__file__).resolve().parent.parent / "plugins.json"
+
+
+# Metadata written to the top of the generated plugins.json.
+REGISTRY_NAME = "Meshroom Hub"
+REGISTRY_DESCRIPTION = "Meshroom Hub plugin registry"
+REGISTRY_URL = "https://github.com/meshroomHub/pluginRegistry"
+REGISTRY_FILE_URL = "https://raw.githubusercontent.com/meshroomHub/pluginRegistry/HEAD/plugins.json"
+
+# Number of most-recent tags to keep in each plugin entry's "versions" list.
+# For now we cap it at the 5 latest.
+MAX_VERSIONS = 5
 
 
 def gh(url, ignoreStatus=()):
@@ -89,12 +101,20 @@ def computePluginEntry(repo):
 
     tagDates = tagDatesOf(fullName)
     if tagDates:
-        version, _ = max(tagDates.items(), key=lambda kv: kv[1])
+        # Sort tags by commit date, newest first.
+        versions = [name for name, _ in sorted(tagDates.items(), key=lambda kv: kv[1], reverse=True)]
+        # "versions" lists the tags Meshroom can offer to fetch for this plugin.
+        versions = versions[:MAX_VERSIONS]
     else:
+        # No tags to offer: fall back to the latest commit on the default branch.
         sha, _ = latestCommit(fullName, branch)
-        version = f"{branch}+{sha[:7]}"
+        versions = [f"{branch}+{sha[:7]}"]
 
-    return {"url": repo["html_url"], "version": version}
+    # repo["size"] is GitHub's compressed size of the whole repo in KB (full git
+    # history, not just the "meshroom" folder), so this is only an estimate.
+    sizeMB = math.ceil(repo["size"] / 1024)
+
+    return {"url": repo["html_url"], "versions": versions, "sizeMB": sizeMB}
 
 
 def main():
@@ -104,12 +124,19 @@ def main():
     plugins = []
     for repo in repos:
         entry = computePluginEntry(repo)
-        print(f"{repo['full_name']}: {entry['version'] if entry else 'skipped (no meshroom folder)'}")
+        print(f"{repo['full_name']}: {entry['versions'][0] if entry else 'skipped (no meshroom folder)'}")
         if entry:
             plugins.append(entry)
 
     plugins.sort(key=lambda e: e["url"].lower())
-    PLUGINS_JSON.write_text(json.dumps(plugins, indent=4) + "\n")
+    registry = {
+        "name": REGISTRY_NAME,
+        "description": REGISTRY_DESCRIPTION,
+        "url": REGISTRY_URL,
+        "fileUrl": REGISTRY_FILE_URL,
+        "entries": plugins,
+    }
+    PLUGINS_JSON.write_text(json.dumps(registry, indent=4) + "\n")
     print(f"Wrote {len(plugins)} plugins to {PLUGINS_JSON}")
 
 

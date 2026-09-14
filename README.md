@@ -4,26 +4,37 @@ Hosts and maintains an up-to-date plugin registry file, allowing Meshroom users 
 
 ## plugins.json
 
-[plugins.json](plugins.json) lists every [meshroomHub](https://github.com/meshroomHub) public repository that is a Meshroom plugin, along with the version Meshroom should fetch:
+[plugins.json](plugins.json) lists every [meshroomHub](https://github.com/meshroomHub) public repository that is a Meshroom plugin, along with the versions Meshroom can fetch:
 
 ```json
 {
-    "url": "https://github.com/meshroomHub/mrSegmentation",
-    "version": "1.4.1"
+    "name": "Meshroom Hub",
+    "description": "Meshroom Hub plugin registry",
+    "url": "https://github.com/meshroomHub/pluginRegistry",
+    "fileUrl": "https://raw.githubusercontent.com/meshroomHub/pluginRegistry/HEAD/plugins.json",
+    "entries": [
+        {
+            "url": "https://github.com/meshroomHub/mrSegmentation",
+            "versions": ["1.4.1", "1.4.0", "1.3.0"],
+            "sizeMB": 12
+        },
+        {
+            "url": "https://github.com/meshroomHub/mrHelloWorld",
+            "versions": ["main+bbc9af0"],
+            "sizeMB": 1
+        }
+    ]
 }
 ```
 
-or, for a repository with no tags:
-
-```json
-{
-    "url": "https://github.com/meshroomHub/mrHelloWorld",
-    "version": "main+bbc9af0"
-}
-```
-
-- `url` — the repository's GitHub URL.
-- `version` — the repository's latest tag name, or `<default-branch>+<short-sha>` of its latest commit if it has no tags.
+- `name` — the registry's name.
+- `description` — the registry's description.
+- `url` — the URL of this registry project.
+- `fileUrl` — the URL Meshroom should fetch to get this file.
+- `entries` — the list of plugins:
+  - `url` — the plugin repository's GitHub URL.
+  - `versions` — the plugin's tag names, newest first (up to the 5 most recent), or a single `<default-branch>+<short-sha>` entry if the repository has no tags.
+  - `sizeMB` (optional) — the plugin approximated size in MB (rounded up).
 
 ## Automatic updates
 
@@ -31,7 +42,7 @@ or, for a repository with no tags:
 
 1. List every public repository in the `meshroomHub` org.
 2. Keep those with a root `meshroom` folder, these are the Meshroom plugins.
-3. For each plugin, compute its current version: its newest tag (by commit date) if it has tags, otherwise `<default-branch>+<short-sha>` of its latest commit.
+3. For each plugin, compute its `versions` (its up to 5 newest tags, by commit date, or otherwise `<default-branch>+<short-sha>` of its latest commit) and `sizeMB` (its approximate size).
 4. Rewrite `plugins.json` with these current values.
 5. If that changed the file, commit it and tag the commit `<year>.<month>.<day>`.
 
