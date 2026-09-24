@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild plugins.json from the current state of the meshroomHub GitHub org.
+"""Rebuild meshroomHub.json from the current state of the meshroomHub GitHub org.
 
 A repository is considered a Meshroom plugin if it has a root "meshroom"
 folder. Its versions are the names of its newest tags (by commit date), 
@@ -19,14 +19,14 @@ from pathlib import Path
 ORG = "meshroomHub"
 API_BASE = "https://api.github.com"
 TOKEN = os.environ["GITHUB_TOKEN"]
-PLUGINS_JSON = Path(__file__).resolve().parent.parent / "plugins.json"
+REGISTRY_JSON = Path(__file__).resolve().parent.parent / "meshroomHub.json"
 
 
-# Metadata written to the top of the generated plugins.json.
+# Metadata written to the top of the generated meshroomHub.json.
 REGISTRY_NAME = "Meshroom Hub"
 REGISTRY_DESCRIPTION = "Meshroom Hub plugin registry"
 REGISTRY_URL = "https://github.com/meshroomHub/pluginRegistry"
-REGISTRY_FILE_URL = "https://raw.githubusercontent.com/meshroomHub/pluginRegistry/HEAD/plugins.json"
+REGISTRY_FILE_URL = "https://raw.githubusercontent.com/meshroomHub/pluginRegistry/HEAD/meshroomHub.json"
 
 # Number of most-recent tags to keep in each plugin entry's "versions" list.
 # For now we cap it at the 5 latest.
@@ -136,8 +136,8 @@ def main():
         "fileUrl": REGISTRY_FILE_URL,
         "entries": plugins,
     }
-    PLUGINS_JSON.write_text(json.dumps(registry, indent=4) + "\n")
-    print(f"Wrote {len(plugins)} plugins to {PLUGINS_JSON}")
+    REGISTRY_JSON.write_text(json.dumps(registry, indent=4) + "\n")
+    print(f"Wrote {len(plugins)} plugins to {REGISTRY_JSON}")
 
 
 if __name__ == "__main__":

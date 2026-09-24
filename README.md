@@ -2,16 +2,16 @@
 
 Hosts and maintains an up-to-date plugin registry file, allowing Meshroom users to easily discover and fetch MeshroomHub plugins.
 
-## plugins.json
+## meshroomHub.json
 
-[plugins.json](plugins.json) lists every [meshroomHub](https://github.com/meshroomHub) public repository that is a Meshroom plugin, along with the versions Meshroom can fetch:
+[meshroomHub.json](meshroomHub.json) lists every [meshroomHub](https://github.com/meshroomHub) public repository that is a Meshroom plugin, along with the versions Meshroom can fetch:
 
 ```json
 {
     "name": "Meshroom Hub",
     "description": "Meshroom Hub plugin registry",
     "url": "https://github.com/meshroomHub/pluginRegistry",
-    "fileUrl": "https://raw.githubusercontent.com/meshroomHub/pluginRegistry/HEAD/plugins.json",
+    "fileUrl": "https://raw.githubusercontent.com/meshroomHub/pluginRegistry/HEAD/meshroomHub.json",
     "entries": [
         {
             "url": "https://github.com/meshroomHub/mrSegmentation",
@@ -38,11 +38,11 @@ Hosts and maintains an up-to-date plugin registry file, allowing Meshroom users 
 
 ## Automatic updates
 
-[.github/workflows/update-plugins.yml](.github/workflows/update-plugins.yml) runs daily and regenerates `plugins.json` via [scripts/update_plugins.py](scripts/update_plugins.py):
+[.github/workflows/update-plugins.yml](.github/workflows/update-plugins.yml) runs daily and regenerates `meshroomHub.json` via [scripts/update_plugins.py](scripts/update_plugins.py):
 
 1. List every public repository in the `meshroomHub` org.
 2. Keep those with a root `meshroom` folder, these are the Meshroom plugins.
 3. For each plugin, compute its `versions` (its up to 5 newest tags, by commit date, or otherwise `<default-branch>+<short-sha>` of its latest commit) and `sizeMB` (its approximate size).
-4. Rewrite `plugins.json` with these current values.
+4. Rewrite `meshroomHub.json` with these current values.
 5. If that changed the file, commit it and tag the commit `<year>.<month>.<day>`.
 
