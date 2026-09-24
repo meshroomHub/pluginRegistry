@@ -2,6 +2,18 @@
 
 Hosts and maintains an up-to-date plugin registry file, allowing Meshroom users to easily discover and fetch MeshroomHub plugins.
 
+## Add the registry to Meshroom
+
+With the `meshroom_plugins` command line tool shipped with Meshroom:
+
+```
+# Register the MeshroomHub plugin registry
+meshroom_plugins registry add https://raw.githubusercontent.com/meshroomHub/pluginRegistry/HEAD/meshroomHub.json
+
+# List the available plugins
+meshroom_plugins list --available
+```
+
 ## meshroomHub.json
 
 [meshroomHub.json](meshroomHub.json) lists every [meshroomHub](https://github.com/meshroomHub) public repository that is a Meshroom plugin, along with the versions Meshroom can fetch:
@@ -27,7 +39,7 @@ Hosts and maintains an up-to-date plugin registry file, allowing Meshroom users 
 }
 ```
 
-- `name` — the registry's name.
+- `name` — the registry's displayable name.
 - `description` — the registry's description.
 - `url` — the URL of this registry project.
 - `fileUrl` — the URL Meshroom should fetch to get this file.
