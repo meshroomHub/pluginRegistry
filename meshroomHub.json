@@ -1,0 +1,48 @@
+{
+    "name": "Meshroom Hub",
+    "description": "Meshroom Hub plugin registry",
+    "url": "https://github.com/meshroomHub/pluginRegistry",
+    "fileUrl": "https://raw.githubusercontent.com/meshroomHub/pluginRegistry/HEAD/meshroomHub.json",
+    "entries": [
+        {
+            "name": "mrDepthEstimation",
+            "url": "https://github.com/meshroomHub/mrDepthEstimation",
+            "versions": [
+                "main+02d976e"
+            ],
+            "publisher": "meshroomHub",
+            "description": "Custom Python nodes dedicated to Depth Estimation for Meshroom",
+            "sizeMB": 1
+        },
+        {
+            "name": "mrMicMac",
+            "url": "https://github.com/meshroomHub/mrMicMac",
+            "versions": [
+                "v1.0.0"
+            ],
+            "publisher": "meshroomHub",
+            "description": "MicMac photogrammetry nodes for Meshroom.",
+            "authors": [
+                "IRIT",
+                "ENSG",
+                "MAP CNRS"
+            ],
+            "requirements": "MicMac 1.2.0 installed locally and added to PATH.",
+            "sizeMB": 1
+        },
+        {
+            "name": "pyalicevisionlib",
+            "url": "https://github.com/meshroomHub/pyalicevisionlib",
+            "versions": [
+                "main+1475613"
+            ],
+            "publisher": "meshroomHub",
+            "description": "Python utilities for AliceVision/Meshroom: camera handling, mesh evaluation, and visualization",
+            "authors": [
+                "Baptiste Brument"
+            ],
+            "license": "MIT",
+            "sizeMB": 1
+        }
+    ]
+}
