@@ -33,6 +33,7 @@ meshroom_plugins list --available
             "description": "What the plugin does.",
             "authors": ["Jane Doe"],
             "requirements": "CUDA >= X.X",
+            "license": "MPL-2.0",
             "sizeMB": 12
         }
     ]
@@ -51,6 +52,7 @@ meshroom_plugins list --available
   - `description` (optional) — the plugin's description (`[project].description`).
   - `authors` (optional) — the plugin's author names (`[project].authors`).
   - `requirements` (optional) — a human-readable description of the plugin's requirements (`[tool.meshroom].requirements`).
+  - `license` (optional) — the plugin's license (`[project].license`, otherwise the `License ::` entries of `[project].classifiers`), followed by its license files if any.
   - `sizeMB` (optional) — the plugin approximated size in MB (rounded up).
 
 The plugin metadata is read from the `pyproject.toml` at the root of the repository's default branch, and validated with the same rules as Meshroom's `PluginMetadata`.

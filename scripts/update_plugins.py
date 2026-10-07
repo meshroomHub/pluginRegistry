@@ -5,9 +5,10 @@ A repository is considered a Meshroom plugin if it has a root "meshroom"
 folder and a root "pyproject.toml".
 Its versions are the names of its newest tags (by commit date), 
 or "<default-branch>+<short-sha>" of the latest commit if it has no valid tags.
-Its name, publisher, description, authors and requirements are read from the
-"pyproject.toml" and validated with the same rules as Meshroom's PluginMetadata.
+Its name, publisher, description, authors, requirements and license are read from
+the "pyproject.toml" and validated with the same rules as Meshroom's PluginMetadata.
 """
+import fnmatch
 import json
 import math
 import os
@@ -17,7 +18,7 @@ import tomllib
 import urllib.error
 import urllib.request
 
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 
 ORG = "meshroomHub"
 TOKEN = os.environ["GITHUB_TOKEN"]
@@ -49,6 +50,7 @@ GRAPHQL_URL = "https://api.github.com/graphql"
 # - the default branch head.
 # - whether it has a root "meshroom" folder.
 # - whether it has a root "pyproject.toml".
+# - its root files, to resolve the "license-files" patterns.
 # - the repo size.
 # - the repo newest tags.
 REPOS_QUERY = """
@@ -66,6 +68,7 @@ query($org: String!, $after: String, $tags: Int!) {
         defaultBranchRef { name target { oid } }
         meshroomFolder: object(expression: "HEAD:meshroom") { __typename }
         pyproject: object(expression: "HEAD:pyproject.toml") { ... on Blob { text } }
+        rootTree: object(expression: "HEAD:") { ... on Tree { entries { name type } } }
         refs(refPrefix: "refs/tags/", first: $tags, orderBy: {field: TAG_COMMIT_DATE, direction: DESC}) {
           nodes { name }
         }
@@ -160,6 +163,89 @@ def sanitizeAuthors(authors, fullName):
     return names
 
 
+def licensesFromClassifiers(classifiers):
+    """Return the license names of the "License ::" trove classifiers, e.g. "MIT License"."""
+    if not isinstance(classifiers, list):
+        return []
+    names = []
+    for classifier in classifiers:
+        if not isinstance(classifier, str):
+            continue
+        segments = [segment.strip() for segment in classifier.split("::")]
+        if len(segments) < 2 or segments[0] != "License":
+            continue
+        name = segments[-1]
+        # "License :: OSI Approved" is a category, it does not name a license.
+        if name and name != "OSI Approved" and name not in names:
+            names.append(name)
+    return names
+
+
+def resolveLicenseFiles(licenseFiles, rootFiles, fullName):
+    """Return the root files matching the "[project].license-files" glob patterns.
+
+    Only the root files of the repo are known: a pattern matching none of them
+    (e.g. one targeting a subfolder) is returned as written.
+    """
+    if licenseFiles is None:
+        return []
+    patterns = licenseFiles
+    if isinstance(licenseFiles, dict):
+        # Draft form of PEP 639: a table with a "paths" or a "globs" list.
+        patterns = licenseFiles.get("paths") or licenseFiles.get("globs") or []
+    if not isinstance(patterns, list):
+        print(f"{fullName}: ignoring invalid 'license-files': {licenseFiles!r}", file=sys.stderr)
+        return []
+
+    files = []
+    for pattern in patterns:
+        if not isinstance(pattern, str) or not pattern:
+            continue
+        posixPattern = PurePosixPath(pattern)
+        # Patterns must stay inside the plugin folder.
+        if posixPattern.is_absolute() or PureWindowsPath(pattern).drive or ".." in posixPattern.parts:
+            print(f"{fullName}: ignoring invalid 'license-files' entry: {pattern!r}", file=sys.stderr)
+            continue
+        matches = sorted(f for f in rootFiles if fnmatch.fnmatchcase(f, posixPattern.as_posix()))
+        files += matches or [pattern]
+    return files
+
+
+def resolveLicense(project, rootFiles, fullName):
+    """Return a displayable license string, e.g. "MIT (see file(s): LICENSE)", or None if no license is declared.
+
+    The name is the first of: "license" as a string (PEP 639), "license.text" (legacy PEP 621),
+    the "License ::" classifiers. The files are those of "license.file" and "license-files".
+    """
+    declared = project.get("license")
+    name = None
+    files = []
+    if isinstance(declared, str):
+        name = declared.strip()
+    elif isinstance(declared, dict):
+        text = declared.get("text")
+        if isinstance(text, str):
+            # A full license text may be pasted here: only keep its first non-empty line.
+            lines = [line.strip() for line in text.splitlines() if line.strip()]
+            name = lines[0] if lines else None
+        if isinstance(declared.get("file"), str) and declared["file"]:
+            files.append(PurePosixPath(declared["file"]).as_posix())
+    elif declared is not None:
+        print(f"{fullName}: ignoring invalid 'license': {declared!r}", file=sys.stderr)
+
+    # Classifiers are only a fallback: they would repeat the name declared by "license".
+    if not name:
+        name = ", ".join(licensesFromClassifiers(project.get("classifiers")))
+
+    files += resolveLicenseFiles(project.get("license-files"), rootFiles, fullName)
+    # Remove duplicates, keeping the declaration order.
+    files = list(dict.fromkeys(files))
+    if not files:
+        return name or None
+    filesText = f"file(s): {', '.join(files)}"
+    return f"{name} (see {filesText})" if name else f"See {filesText}"
+
+
 def computePluginEntry(repo):
     """Compute the registry entry for a repo, or None if it isn't a plugin."""
     fullName = repo["nameWithOwner"]
@@ -187,6 +273,8 @@ def computePluginEntry(repo):
     description = sanitizeText(project.get("description"), "description", fullName)
     authors = sanitizeAuthors(project.get("authors"), fullName)
     requirements = sanitizeText(meshroom.get("requirements"), "requirements", fullName)
+    rootFiles = [e["name"] for e in (repo.get("rootTree") or {}).get("entries") or [] if e["type"] == "blob"]
+    license = resolveLicense(project, rootFiles, fullName)
 
     # Tags come sorted by commit date, newest first: keep the valid version names.
     versions = [t["name"] for t in repo["refs"]["nodes"] if PLUGIN_VERSION_PATTERN.match(t["name"])]
@@ -208,6 +296,8 @@ def computePluginEntry(repo):
         entry["authors"] = authors
     if requirements is not None:
         entry["requirements"] = requirements
+    if license is not None:
+        entry["license"] = license
     entry["sizeMB"] = sizeMB
     return entry
 
