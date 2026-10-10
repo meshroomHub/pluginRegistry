@@ -15,6 +15,20 @@
             "sizeMB": 1
         },
         {
+            "name": "mr-lino-unips",
+            "url": "https://github.com/meshroomHub/mrLINOUniPS",
+            "versions": [
+                "main+bc41539"
+            ],
+            "publisher": "meshroomHub",
+            "description": "Meshroom plugin for LINO universal photometric stereo",
+            "authors": [
+                "Baptiste Brument"
+            ],
+            "license": "MPL-2.0",
+            "sizeMB": 1
+        },
+        {
             "name": "mrMicMac",
             "url": "https://github.com/meshroomHub/mrMicMac",
             "versions": [
@@ -28,6 +42,34 @@
                 "MAP CNRS"
             ],
             "requirements": "MicMac 1.2.0 installed locally and added to PATH.",
+            "sizeMB": 1
+        },
+        {
+            "name": "mr-sdm-unips",
+            "url": "https://github.com/meshroomHub/mrSDMUniPS",
+            "versions": [
+                "main+f6ef4b9"
+            ],
+            "publisher": "meshroomHub",
+            "description": "Meshroom plugin for SDM-UniPS universal photometric stereo",
+            "authors": [
+                "Baptiste Brument"
+            ],
+            "license": "MPL-2.0",
+            "sizeMB": 1
+        },
+        {
+            "name": "mr-uni-ms-ps",
+            "url": "https://github.com/meshroomHub/mrUniMSPS",
+            "versions": [
+                "main+81297e2"
+            ],
+            "publisher": "meshroomHub",
+            "description": "Meshroom plugin for Uni-MS-PS universal photometric stereo",
+            "authors": [
+                "Baptiste Brument"
+            ],
+            "license": "MPL-2.0",
             "sizeMB": 1
         },
         {
