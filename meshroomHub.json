@@ -18,7 +18,7 @@
             "name": "mr-lino-unips",
             "url": "https://github.com/meshroomHub/mrLINOUniPS",
             "versions": [
-                "main+bc41539"
+                "main+3a2c5fc"
             ],
             "publisher": "meshroomHub",
             "description": "Meshroom plugin for LINO universal photometric stereo",
