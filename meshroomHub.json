@@ -18,7 +18,7 @@
             "name": "mr-lino-unips",
             "url": "https://github.com/meshroomHub/mrLINOUniPS",
             "versions": [
-                "main+633bcb8"
+                "main+a5f4c47"
             ],
             "publisher": "meshroomHub",
             "description": "Meshroom plugin for LINO universal photometric stereo",
@@ -48,7 +48,7 @@
             "name": "mr-sdm-unips",
             "url": "https://github.com/meshroomHub/mrSDMUniPS",
             "versions": [
-                "main+c94b523"
+                "main+db0517f"
             ],
             "publisher": "meshroomHub",
             "description": "Meshroom plugin for SDM-UniPS universal photometric stereo",
@@ -62,7 +62,7 @@
             "name": "mr-uni-ms-ps",
             "url": "https://github.com/meshroomHub/mrUniMSPS",
             "versions": [
-                "main+f82158e"
+                "main+680010d"
             ],
             "publisher": "meshroomHub",
             "description": "Meshroom plugin for Uni-MS-PS universal photometric stereo",
