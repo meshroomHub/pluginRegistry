@@ -15,6 +15,20 @@
             "sizeMB": 1
         },
         {
+            "name": "mr-led-getter",
+            "url": "https://github.com/meshroomHub/mrLedGetter",
+            "versions": [
+                "main+07d5078"
+            ],
+            "publisher": "meshroomHub",
+            "description": "Meshroom plugin for LED-getter self-calibrated near-light photometric stereo",
+            "authors": [
+                "Benjamin Coupry"
+            ],
+            "license": "MIT",
+            "sizeMB": 1
+        },
+        {
             "name": "mr-lino-unips",
             "url": "https://github.com/meshroomHub/mrLINOUniPS",
             "versions": [
