@@ -59,6 +59,21 @@
             "sizeMB": 1
         },
         {
+            "name": "mrRNbNeuS2",
+            "url": "https://github.com/meshroomHub/mrRNbNeuS2",
+            "versions": [
+                "v1.0.0"
+            ],
+            "publisher": "meshroomHub",
+            "description": "Meshroom plugin for RNb-NeuS2 neural surface reconstruction from normal and reflectance maps.",
+            "authors": [
+                "Baptiste Brument"
+            ],
+            "requirements": "Nvidia GPU with CUDA >= 12.4. The RNb-NeuS2 testbed from the RNb-NeuS2 v2.0.1 release (see README).",
+            "license": "MPL-2.0",
+            "sizeMB": 1
+        },
+        {
             "name": "mr-sdm-unips",
             "url": "https://github.com/meshroomHub/mrSDMUniPS",
             "versions": [
