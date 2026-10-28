@@ -46,7 +46,8 @@
             "name": "mrMicMac",
             "url": "https://github.com/meshroomHub/mrMicMac",
             "versions": [
-                "v1.0.0"
+                "1.2.0",
+                "1.0.0"
             ],
             "publisher": "meshroomHub",
             "description": "MicMac photogrammetry nodes for Meshroom.",
@@ -62,6 +63,7 @@
             "name": "mrRNbNeuS2",
             "url": "https://github.com/meshroomHub/mrRNbNeuS2",
             "versions": [
+                "v1.0.1",
                 "v1.0.0"
             ],
             "publisher": "meshroomHub",
