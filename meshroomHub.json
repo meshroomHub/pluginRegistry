@@ -60,9 +60,22 @@
             "sizeMB": 1
         },
         {
+            "name": "mrPhotometricStereo",
+            "url": "https://github.com/meshroomHub/mrPhotometricStereoClassic",
+            "versions": [
+                "main+bb95596"
+            ],
+            "publisher": "meshroomHub",
+            "description": "Photometric stereo implemented in Python with Halide: normal and albedo maps from images lit by known directional lights.",
+            "requirements": "AliceVision Python bindings (pyalicevision), Halide Python bindings, OpenImageIO Python bindings",
+            "license": "MPL-2.0",
+            "sizeMB": 1
+        },
+        {
             "name": "mrRNbNeuS2",
             "url": "https://github.com/meshroomHub/mrRNbNeuS2",
             "versions": [
+                "v1.0.2",
                 "v1.0.1",
                 "v1.0.0"
             ],
@@ -71,7 +84,7 @@
             "authors": [
                 "Baptiste Brument"
             ],
-            "requirements": "Nvidia GPU with CUDA >= 12.4. The RNb-NeuS2 testbed from the RNb-NeuS2 v2.0.1 release (see README).",
+            "requirements": "Nvidia GPU with CUDA >= 12.4. The RNb-NeuS2 testbed from the RNb-NeuS2 v2.0.2 release (see README).",
             "license": "MPL-2.0",
             "sizeMB": 1
         },
