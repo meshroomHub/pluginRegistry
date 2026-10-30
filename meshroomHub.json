@@ -60,6 +60,22 @@
             "sizeMB": 1
         },
         {
+            "name": "mrOpenRNb",
+            "url": "https://github.com/meshroomHub/mrOpenRNb",
+            "versions": [
+                "v2.1.0"
+            ],
+            "publisher": "meshroomHub",
+            "description": "Meshroom plugin for Open-RNb neural surface reconstruction.",
+            "authors": [
+                "Baptiste Brument",
+                "Robin Bruneau"
+            ],
+            "requirements": "Nvidia GPU with CUDA >= 12.4 (RTX 2080 Ti or newer recommended).",
+            "license": "MPL-2.0",
+            "sizeMB": 1
+        },
+        {
             "name": "mrPhotometricStereo",
             "url": "https://github.com/meshroomHub/mrPhotometricStereoClassic",
             "versions": [
@@ -75,6 +91,7 @@
             "name": "mrRNbNeuS2",
             "url": "https://github.com/meshroomHub/mrRNbNeuS2",
             "versions": [
+                "v1.0.3",
                 "v1.0.2",
                 "v1.0.1",
                 "v1.0.0"
@@ -84,7 +101,7 @@
             "authors": [
                 "Baptiste Brument"
             ],
-            "requirements": "Nvidia GPU with CUDA >= 12.4. The RNb-NeuS2 testbed from the RNb-NeuS2 v2.0.2 release (see README).",
+            "requirements": "Nvidia GPU with a driver supporting CUDA 12. The RNb-NeuS2 testbed from the RNb-NeuS2 v2.0.3 release (see README).",
             "license": "MPL-2.0",
             "sizeMB": 1
         },
