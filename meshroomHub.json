@@ -95,6 +95,7 @@
             "name": "mrRNbNeuS2",
             "url": "https://github.com/meshroomHub/mrRNbNeuS2",
             "versions": [
+                "v1.1.0",
                 "v1.0.3",
                 "v1.0.2",
                 "v1.0.1",
@@ -105,7 +106,7 @@
             "authors": [
                 "Baptiste Brument"
             ],
-            "requirements": "Nvidia GPU with a driver supporting CUDA 12. The RNb-NeuS2 testbed from the RNb-NeuS2 v2.0.3 release (see README).",
+            "requirements": "Nvidia GPU with a driver supporting CUDA 12. The RNb-NeuS2 testbed of the RNb-NeuS2 v2.0.3 release, installed with the plugin when the plugin manager supports release assets (see README).",
             "license": "MPL-2.0",
             "sizeMB": 1
         },
