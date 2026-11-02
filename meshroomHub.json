@@ -18,6 +18,7 @@
             "name": "mrLedGetter",
             "url": "https://github.com/meshroomHub/mrLedGetter",
             "versions": [
+                "v1.0.2",
                 "v1.0.1",
                 "v1.0.0"
             ],
@@ -34,6 +35,7 @@
             "name": "mrLINOUniPS",
             "url": "https://github.com/meshroomHub/mrLINOUniPS",
             "versions": [
+                "v2.0.2",
                 "v2.0.1",
                 "v2.0.0"
             ],
@@ -42,7 +44,7 @@
             "authors": [
                 "Baptiste Brument"
             ],
-            "requirements": "Nvidia GPU with CUDA >= 12.X (Ampere or newer recommended for bfloat16 support).",
+            "requirements": "Nvidia GPU with CUDA >= 12.X, Ampere or newer (compute capability >= 8.0, for bfloat16).",
             "license": "MPL-2.0",
             "sizeMB": 1
         },
@@ -67,6 +69,7 @@
             "name": "mrOpenRNb",
             "url": "https://github.com/meshroomHub/mrOpenRNb",
             "versions": [
+                "v2.1.1",
                 "v2.1.0"
             ],
             "publisher": "meshroomHub",
@@ -95,11 +98,11 @@
             "name": "mrRNbNeuS2",
             "url": "https://github.com/meshroomHub/mrRNbNeuS2",
             "versions": [
+                "v1.1.1",
                 "v1.1.0",
                 "v1.0.3",
                 "v1.0.2",
-                "v1.0.1",
-                "v1.0.0"
+                "v1.0.1"
             ],
             "publisher": "meshroomHub",
             "description": "Meshroom plugin for RNb-NeuS2 neural surface reconstruction from normal and reflectance maps.",
@@ -114,6 +117,7 @@
             "name": "mrSDMUniPS",
             "url": "https://github.com/meshroomHub/mrSDMUniPS",
             "versions": [
+                "v2.0.2",
                 "v2.0.1",
                 "v2.0.0"
             ],
@@ -130,6 +134,7 @@
             "name": "mrUniMSPS",
             "url": "https://github.com/meshroomHub/mrUniMSPS",
             "versions": [
+                "v2.0.2",
                 "v2.0.1",
                 "v2.0.0"
             ],
