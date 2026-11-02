@@ -15,30 +15,34 @@
             "sizeMB": 1
         },
         {
-            "name": "mr-led-getter",
+            "name": "mrLedGetter",
             "url": "https://github.com/meshroomHub/mrLedGetter",
             "versions": [
-                "main+07d5078"
+                "v1.0.1",
+                "v1.0.0"
             ],
             "publisher": "meshroomHub",
             "description": "Meshroom plugin for LED-getter self-calibrated near-light photometric stereo",
             "authors": [
                 "Benjamin Coupry"
             ],
+            "requirements": "Nvidia GPU with CUDA 12 (the nodes fall back to the CPU, much slower).",
             "license": "MIT",
             "sizeMB": 1
         },
         {
-            "name": "mr-lino-unips",
+            "name": "mrLINOUniPS",
             "url": "https://github.com/meshroomHub/mrLINOUniPS",
             "versions": [
-                "main+a5f4c47"
+                "v2.0.1",
+                "v2.0.0"
             ],
             "publisher": "meshroomHub",
-            "description": "Meshroom plugin for LINO universal photometric stereo",
+            "description": "Meshroom plugin for LINO universal photometric stereo.",
             "authors": [
                 "Baptiste Brument"
             ],
+            "requirements": "Nvidia GPU with CUDA >= 12.X (Ampere or newer recommended for bfloat16 support).",
             "license": "MPL-2.0",
             "sizeMB": 1
         },
@@ -106,30 +110,34 @@
             "sizeMB": 1
         },
         {
-            "name": "mr-sdm-unips",
+            "name": "mrSDMUniPS",
             "url": "https://github.com/meshroomHub/mrSDMUniPS",
             "versions": [
-                "main+db0517f"
+                "v2.0.1",
+                "v2.0.0"
             ],
             "publisher": "meshroomHub",
-            "description": "Meshroom plugin for SDM-UniPS universal photometric stereo",
+            "description": "Meshroom plugin for SDM-UniPS universal photometric stereo.",
             "authors": [
                 "Baptiste Brument"
             ],
+            "requirements": "Nvidia GPU with CUDA >= 12.X.",
             "license": "MPL-2.0",
             "sizeMB": 1
         },
         {
-            "name": "mr-uni-ms-ps",
+            "name": "mrUniMSPS",
             "url": "https://github.com/meshroomHub/mrUniMSPS",
             "versions": [
-                "main+680010d"
+                "v2.0.1",
+                "v2.0.0"
             ],
             "publisher": "meshroomHub",
-            "description": "Meshroom plugin for Uni-MS-PS universal photometric stereo",
+            "description": "Meshroom plugin for Uni-MS-PS universal photometric stereo.",
             "authors": [
                 "Baptiste Brument"
             ],
+            "requirements": "Nvidia GPU with CUDA >= 12.X.",
             "license": "MPL-2.0",
             "sizeMB": 1
         },
