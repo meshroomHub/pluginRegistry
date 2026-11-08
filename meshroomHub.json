@@ -35,6 +35,7 @@
             "name": "mrLINOUniPS",
             "url": "https://github.com/meshroomHub/mrLINOUniPS",
             "versions": [
+                "v2.0.3",
                 "v2.0.2",
                 "v2.0.1",
                 "v2.0.0"
@@ -118,6 +119,7 @@
             "name": "mrSDMUniPS",
             "url": "https://github.com/meshroomHub/mrSDMUniPS",
             "versions": [
+                "v2.0.3",
                 "v2.0.2",
                 "v2.0.1",
                 "v2.0.0"
@@ -135,6 +137,7 @@
             "name": "mrUniMSPS",
             "url": "https://github.com/meshroomHub/mrUniMSPS",
             "versions": [
+                "v2.0.3",
                 "v2.0.2",
                 "v2.0.1",
                 "v2.0.0"
