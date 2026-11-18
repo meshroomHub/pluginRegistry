@@ -18,7 +18,7 @@
             "name": "EngravingSeg",
             "url": "https://github.com/meshroomHub/mrEngravingSeg",
             "versions": [
-                "main+f01c1cd"
+                "main+79c4ef5"
             ],
             "publisher": "meshroomHub",
             "description": "Meshroom plugin for tiled engraving segmentation.",
