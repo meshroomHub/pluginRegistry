@@ -15,14 +15,14 @@
             "sizeMB": 1
         },
         {
-            "name": "EngravingSeg",
+            "name": "mrEngravingSeg",
             "url": "https://github.com/meshroomHub/mrEngravingSeg",
             "versions": [
-                "main+ad4304f"
+                "main+ff7103d"
             ],
             "publisher": "meshroomHub",
             "description": "Meshroom plugin for tiled engraving segmentation.",
-            "requirements": "Python 3.10 or 3.11; TensorFlow 2.13.1.",
+            "requirements": "Python 3.10 or 3.11; TensorFlow 2.15.1; psutil.",
             "sizeMB": 1
         },
         {
