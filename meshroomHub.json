@@ -115,11 +115,11 @@
             "name": "mrRNbNeuS2",
             "url": "https://github.com/meshroomHub/mrRNbNeuS2",
             "versions": [
+                "v1.1.3",
                 "v1.1.2",
                 "v1.1.1",
                 "v1.1.0",
-                "v1.0.3",
-                "v1.0.2"
+                "v1.0.3"
             ],
             "publisher": "meshroomHub",
             "description": "Meshroom plugin for RNb-NeuS2 neural surface reconstruction from normal and reflectance maps.",
